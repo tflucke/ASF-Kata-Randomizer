@@ -1,0 +1,86 @@
+var kata = [
+    {
+	"name": "Block-Punch Exercise",
+	"belt": "white",
+	"isKata": false
+    },
+    {
+	"name": "Punching Exercise",
+	"belt": "white",
+	"isKata": false
+    },
+    {
+	"name": "Kicking Kata",
+	"isClass": true,
+	"kata": [
+	    {
+		"name": "One"
+	    },
+	    {
+		"name": "Two"
+	    }
+	]
+    },
+    {
+	"name": "Fukugata",
+	"belt": "white",
+	"isClass": true,
+	"kata": [
+	    {
+		"name": "Ichi"
+	    },
+	    {
+		"name": "Ni"
+	    }
+	]
+    },
+    {
+	"name": "Pidan",
+	"belt": "green",
+	"isClass": true,
+	"kata": [
+	    {
+		"name": "Shodan"
+	    },
+	    {
+		"name": "Nidan"
+	    },
+	    {
+		"name": "Sandan"
+	    },
+	    {
+		"name": "Yandan"
+	    },
+	    {
+		"name": "Godan"
+	    }
+	]
+    },
+    {
+	"name": "Nihachi",
+	"belt": "brown",
+	"isClass": true,
+	"kata": [
+	    {
+		"name": "Shodan"
+	    },
+	    {
+		"name": "Nidan"
+	    },
+	    {
+		"name": "Sandan"
+	    }
+	]
+    },
+    {
+	"name": "Anaku",
+	"belt": "brown"
+    },
+    {
+	"name": "Wankon",
+	"belt": "brown"
+    },
+    {
+	"name": "San Luis Obispo Kata"
+    }
+]

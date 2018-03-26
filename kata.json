@@ -22,7 +22,7 @@ var kata = [
 	]
     },
     {
-	"name": "Fukugata",
+	"name": "Fukyugata",
 	"belt": "white",
 	"isClass": true,
 	"kata": [
@@ -57,7 +57,7 @@ var kata = [
 	]
     },
     {
-	"name": "Nihachi",
+	"name": "Naihanchi",
 	"belt": "brown",
 	"isClass": true,
 	"kata": [
@@ -73,7 +73,7 @@ var kata = [
 	]
     },
     {
-	"name": "Anaku",
+	"name": "Ananku",
 	"belt": "brown"
     },
     {
@@ -82,5 +82,29 @@ var kata = [
     },
     {
 	"name": "San Luis Obispo Kata"
-    }
+    },
+    {
+	"name": "Rohai",
+	"belt": "black"
+    },
+    {
+	"name": "Wanshu",
+	"belt": "black"
+    },
+    {
+	"name": "Passai",
+	"belt": "black"
+    },
+    {
+	"name": "Gojushiho",
+	"belt": "black"
+    },
+    {
+	"name": "Chinto",
+	"belt": "black"
+    },
+    {
+	"name": "Kusanku",
+	"belt": "black"
+    },
 ]

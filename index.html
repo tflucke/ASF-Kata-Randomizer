@@ -68,7 +68,7 @@
 
       function nameToId(name)
       {
-	  return name.replace(" ", "_");
+	  return name.replace(/\s+/g, "_");
       }
       
      function pickKata()

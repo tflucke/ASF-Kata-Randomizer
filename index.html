@@ -3,6 +3,7 @@
   <head>
     <title>Random Kata Generator</title>
     <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="cookie.js"></script>
     <script type="text/javascript">
       $.ajax("kata.json", {
 	  success: function (kata) {
@@ -33,13 +34,15 @@
       function printKataClass(parent, cls, prefix)
       {
 	  var sublist = $("<ul>");
-	  var label = $("<label>").text(cls.name).on("click", function () {
-	      var children = sublist.find(".kata");
-	      var shouldBeChecked = children.length != sublist.find(".kata:checked").length;
-	      children.each(function(index, child) {
-		  $(child).prop("checked", shouldBeChecked);
+	  var label = $("<label>")
+	      .text(cls.name)
+	      .on("click", function () {
+		  var children = sublist.find(".kata");
+		  var shouldBeChecked = children.length != sublist.find(".kata:checked").length;
+		  children.each(function(index, child) {
+		      $(child).prop("checked", shouldBeChecked);
+		  });
 	      });
-	  });
 	  printList(sublist, cls.kata, (prefix != null? prefix: "") + cls.name + " ");
 	  parent.append($("<li>").append(label).append(sublist));
       }
@@ -48,8 +51,16 @@
       {
 	  var name = (prefix != null? prefix: "") + cur.name;
 	  var id = nameToId(name);
-	  var checkbox = $("<input>").attr("type", "checkbox").attr("id", id)
-	      .addClass("kata").data("name", name).on("change", function() {checkLowerKata(name);});
+	  var checkbox = $("<input>")
+	      .attr("type", "checkbox")
+	      .attr("id", id)
+	      .addClass("kata")
+	      .data("name", name)
+	      .prop("checked", Cookies.get(name) == "true")
+	      .on("change", function() {
+		  checkLowerKata(name);
+		  Cookies.set(name, checkbox.prop("checked"));
+	      });
 	  var label = $("<label>").text(name).attr("for", id);
 	  parent.append($("<li>").append(checkbox).append(label));
       }
@@ -66,6 +77,7 @@
 		  else
 		  {
 		      $(elm).prop("checked", true);
+		      Cookies.set($(elm).data("name"), true);
 		  }
 	      });
 	  }

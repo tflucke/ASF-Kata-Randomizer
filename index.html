@@ -44,14 +44,14 @@
 	  var name = (prefix != null? prefix: "") + cur.name;
 	  var id = nameToId(name);
 	  var checkbox = $("<input>").attr("type", "checkbox").attr("id", id)
-	      .addClass("kata").data("name", name).on("change", function() {checkLowerKata(name, kata);});
+	      .addClass("kata").data("name", name).on("change", function() {checkLowerKata(name);});
 	  var label = $("<label>").text(name).attr("for", id);
 	  parent.append($("<li>").append(checkbox).append(label));
       }
       
-      function checkLowerKata(name, kata)
+      function checkLowerKata(name)
       {
-	  if ($("#autocheckLower:checked").length > 0 && $("#"+nameToId(name)).prop("checked"))
+	  if ($("#autocheckLower").prop("checked") > 0 && $("#"+nameToId(name)).prop("checked"))
 	  {
 	      $(".kata").each(function(index, elm) {
 		  if ($(elm).data("name") == name)

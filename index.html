@@ -2,12 +2,17 @@
 <html>
   <head>
     <title>Random Kata Generator</title>
-    <script type="text/javascript" src="/usr/share/javascript/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="kata.json"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-	  console.debug("Ready!");
-	  printList($("#kataList"), kata);
+      $.ajax("kata.json", {
+	  success: function (kata) {
+	      $(document).ready(function() {
+		  printList($("#kataList"), kata);
+	      });
+	  },
+	  error: function() {
+	      alert("Error loading kata list.");
+	  }
       });
       
       function printList(parent, list, prefix)

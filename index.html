@@ -5,63 +5,83 @@
     <script type="text/javascript" src="/usr/share/javascript/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="kata.json"></script>
     <script type="text/javascript">
-      $(document).ready(function()
-      {
-         console.debug("Ready!");
-	 printList($("#kataList"), kata);
+      $(document).ready(function() {
+	  console.debug("Ready!");
+	  printList($("#kataList"), kata);
       });
-
-     function printList(parent, list, prefix)
-     {
-       for (var i = 0; i < list.length; i++)
-       {
-	  if (list[i].isClass)
-	  {
-	    printKataClass(parent, list[i], prefix);
-	  }
-	  else
-	  {
-	    printKata(parent, list[i], prefix);
-	  }
-       }
-     }
-
-     function printKataClass(parent, cls, prefix)
+      
+      function printList(parent, list, prefix)
       {
-	var sublist = $("<ul>");
-        var label = $("<label>").text(cls.name).on("click", function ()
-        {
-	  var children = sublist.find(".kata");
-	  var shouldBeChecked = children.length != sublist.find(".kata:checked").length;
-	  children.each(function(index, child)
+	  for (var i = 0; i < list.length; i++)
 	  {
-	    $(child).prop("checked", shouldBeChecked);
+	      if (list[i].isClass)
+	      {
+		  printKataClass(parent, list[i], prefix);
+	      }
+	      else
+	      {
+		  printKata(parent, list[i], prefix);
+	      }
+	  }
+      }
+      
+      function printKataClass(parent, cls, prefix)
+      {
+	  var sublist = $("<ul>");
+	  var label = $("<label>").text(cls.name).on("click", function () {
+	      var children = sublist.find(".kata");
+	      var shouldBeChecked = children.length != sublist.find(".kata:checked").length;
+	      children.each(function(index, child) {
+		  $(child).prop("checked", shouldBeChecked);
+	      });
 	  });
-        });
-	printList(sublist, cls.kata, (prefix != null? prefix: "") + cls.name + " ");
-	parent.append($("<li>").append(label).append(sublist));
-     }
-			     
-      function printKata(parent, kata, prefix)
+	  printList(sublist, cls.kata, (prefix != null? prefix: "") + cls.name + " ");
+	  parent.append($("<li>").append(label).append(sublist));
+      }
+      
+      function printKata(parent, cur, prefix)
       {
-	var name = (prefix != null? prefix: "") + kata.name;
-	var id = name.replace(" ", "_");
-	var checkbox = $("<input>").attr("type", "checkbox").attr("id", id).addClass("kata").data("name", name);
-        var label = $("<label>").text(name).attr("for", id);
-	parent.append($("<li>").append(checkbox).append(label));
+	  var name = (prefix != null? prefix: "") + cur.name;
+	  var id = nameToId(name);
+	  var checkbox = $("<input>").attr("type", "checkbox").attr("id", id)
+	      .addClass("kata").data("name", name).on("change", function() {checkLowerKata(name, kata);});
+	  var label = $("<label>").text(name).attr("for", id);
+	  parent.append($("<li>").append(checkbox).append(label));
+      }
+      
+      function checkLowerKata(name, kata)
+      {
+	  if ($("#autocheckLower:checked").length > 0 && $("#"+nameToId(name)).prop("checked"))
+	  {
+	      $(".kata").each(function(index, elm) {
+		  if ($(elm).data("name") == name)
+		  {
+		      return false;
+		  }
+		  else
+		  {
+		      $(elm).prop("checked", true);
+		  }
+	      });
+	  }
       }
 
+      function nameToId(name)
+      {
+	  return name.replace(" ", "_");
+      }
+      
      function pickKata()
-     {
-	var known = $(".kata:checked");
-	var selected = $(known[Math.floor(Math.random() * known.length)]);
-        $("#choosenDisplay").text(selected.data("name"));
+      {
+	  var known = $(".kata:checked");
+	  var selected = $(known[Math.floor(Math.random() * known.length)]);
+	  $("#choosenDisplay").text(selected.data("name"));
      }
-			   
-  </script>
+    </script>
   </head>
   <body>
     <h1 id="choosenDisplay" style="width: 100%; text-align: center;"></h1>
+    <input type="checkbox" id="autocheckLower" checked="checked" /><label for="autocheckLower">Auto-check Lower Kata</label>
     <ul id="kataList">
     </ul>
     <button type="button" onclick="pickKata();">Kata!</button>

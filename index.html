@@ -2,6 +2,14 @@
 <html>
   <head>
     <title>Random Kata Generator</title>
+    <style type="text/css">
+      li {
+	  list-style-type: none;
+      }
+      .kataClass {
+	  font-weight: bold;
+      }
+    </style>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="cookie.js"></script>
     <script type="text/javascript">
@@ -35,6 +43,7 @@
       {
 	  var sublist = $("<ul>");
 	  var label = $("<label>")
+	      .addClass("kataClass")
 	      .text(cls.name)
 	      .on("click", function () {
 		  var children = sublist.find(".kata");
